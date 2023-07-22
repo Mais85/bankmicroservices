@@ -1,0 +1,30 @@
+
+services:
+
+  accounts:
+    image: mais85/accounts:latest
+    mem_limit: 700m
+    ports:
+      - "8081:8081"
+    networks:
+      - eazybank-network
+
+  loans:
+    image: mais85/loans:latest
+    mem_limit: 700m
+    ports:
+      - "8091:8091"
+    networks:
+      - eazybank-network
+
+  cards:
+    image: mais85/cards:latest
+    mem_limit: 700m
+    ports:
+      - "9001:9001"
+    networks:
+      - eazybank-network
+
+
+networks:
+  eazybank-network:
