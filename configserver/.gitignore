@@ -3,12 +3,11 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/main/**/target/
 !**/src/test/**/target/
-src/main/resources/
 /src/main/resources/application.properties
-src/main/resources/**
-/src/main/resources/
+src/main/resources/application.properties
 configserver/src/main/resources/application.properties
-C:\Users\DeveloperPC\IdeaProjects\bankmicroservices\configserver\src\main\resources\application.properties
+
+
 ####******
 
 ### STS ###
