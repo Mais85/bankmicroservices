@@ -1,0 +1,32 @@
+{
+  "groups": [
+    {
+      "name": "accounts",
+      "type": "com.eazybytes.accounts.config.AccountServiceConfig",
+      "sourceType": "com.eazybytes.accounts.config.AccountServiceConfig"
+    }
+  ],
+  "properties": [
+    {
+      "name": "accounts.active-branches",
+      "type": "java.util.List<java.lang.String>",
+      "sourceType": "com.eazybytes.accounts.config.AccountServiceConfig"
+    },
+    {
+      "name": "accounts.build-version",
+      "type": "java.lang.String",
+      "sourceType": "com.eazybytes.accounts.config.AccountServiceConfig"
+    },
+    {
+      "name": "accounts.mail-details",
+      "type": "java.util.Map<java.lang.String,java.lang.String>",
+      "sourceType": "com.eazybytes.accounts.config.AccountServiceConfig"
+    },
+    {
+      "name": "accounts.msg",
+      "type": "java.lang.String",
+      "sourceType": "com.eazybytes.accounts.config.AccountServiceConfig"
+    }
+  ],
+  "hints": []
+}
