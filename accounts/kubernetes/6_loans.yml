@@ -1,30 +1,30 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: eurekaserver-deployment
+  name: loans-deployment
   labels:
-    app: eurekaserver
+    app: loans
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: eurekaserver
+      app: loans
   template:
     metadata:
       labels:
-        app: eurekaserver
+        app: loans
     spec:
       containers:
-        - name: eurekaserver
-          image: mais85/eurekaserver:latest
+        - name: loans
+          image: mais85/loans:latest
           ports:
-            - containerPort: 8070
+            - containerPort: 8091
           env:
             - name: SPRING_APPLICATION_NAME
               valueFrom:
                 configMapKeyRef:
                   name: eazybank-configmap
-                  key: EUREKA_APPLICATION_NAME
+                  key: LOANS_APPLICATION_NAME
             - name: SPRING_PROFILES_ACTIVE
               valueFrom:
                 configMapKeyRef:
@@ -40,17 +40,21 @@ spec:
                 configMapKeyRef:
                   name: eazybank-configmap
                   key: SPRING_CONFIG_IMPORT
-
+            - name: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
+              valueFrom:
+                configMapKeyRef:
+                  name: eazybank-configmap
+                  key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: eurekaserver-service
+  name: loans-service
 spec:
   selector:
-    app: eurekaserver
+    app: loans
   type: LoadBalancer
   ports:
     - protocol: TCP
-      port: 8070
-      targetPort: 8070
+      port: 8091
+      targetPort: 8091

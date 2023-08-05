@@ -83,7 +83,7 @@ public class AccountsController {
     @RateLimiter(name = "sayHello", fallbackMethod = "sayHelloFallback")
     public String sayHello(){
         System.out.println("hi");
-        return "Hello , welcome eazybank";
+        return "Hello , welcome  Kubernetes cluster eazybank";
     }
 
     private String sayHelloFallback(Throwable t) {
