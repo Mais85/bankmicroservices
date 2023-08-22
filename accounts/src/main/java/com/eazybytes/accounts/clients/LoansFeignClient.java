@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import java.util.List;
 
 @FeignClient("loans")
-public interface LoansFeingClient {
+public interface LoansFeignClient {
 
     @RequestMapping(method = RequestMethod.POST, value = "myLoans",consumes = "application/json")
     List<Loans> getLoansDetails(@RequestHeader("eazybank-correlation-id") String correlationid, @RequestBody Customer customer);

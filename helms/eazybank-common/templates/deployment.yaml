@@ -54,4 +54,4 @@ spec:
                 name: {{ .Values.global.configMapName }}
                 key: EUREKA_CLIENT_SERVICEURL_DEFAULTZONE
           {{- end }}
-  {{- end -}}
+{{- end -}}

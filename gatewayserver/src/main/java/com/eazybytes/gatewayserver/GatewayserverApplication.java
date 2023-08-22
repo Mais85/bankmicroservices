@@ -1,7 +1,10 @@
 package com.eazybytes.gatewayserver;
 
+import java.util.Date;
+
 import com.eazybytes.gatewayserver.trace.logging.ObservationContextSnapshotLifter;
 import io.micrometer.context.ContextSnapshot;
+import io.micrometer.tracing.Tracer;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.condition.ConditionalOnClass;
@@ -13,8 +16,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.event.ContextRefreshedEvent;
 import reactor.core.publisher.Hooks;
 import reactor.core.publisher.Operators;
-
-import java.util.Date;
 
 @SpringBootApplication
 public class GatewayserverApplication {

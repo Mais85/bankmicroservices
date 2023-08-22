@@ -9,10 +9,10 @@ import org.springframework.context.annotation.ComponentScans;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @SpringBootApplication
+@RefreshScope
 @ComponentScans({ @ComponentScan("com.eazybytes.cards.controller") })
 @EnableJpaRepositories("com.eazybytes.cards.repository")
 @EntityScan("com.eazybytes.cards.model")
-@RefreshScope
 public class CardsApplication {
 
 	public static void main(String[] args) {

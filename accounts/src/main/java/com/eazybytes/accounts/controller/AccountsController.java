@@ -1,7 +1,7 @@
 package com.eazybytes.accounts.controller;
 
 import com.eazybytes.accounts.clients.CardsFeignClient;
-import com.eazybytes.accounts.clients.LoansFeingClient;
+import com.eazybytes.accounts.clients.LoansFeignClient;
 import com.eazybytes.accounts.config.AccountServiceConfig;
 import com.eazybytes.accounts.model.*;
 import com.eazybytes.accounts.repository.AccountsRepository;
@@ -27,7 +27,7 @@ public class AccountsController {
     private static final Logger logger = LoggerFactory.getLogger(AccountsController.class);
     private final AccountsRepository accountsRepository;
     private final AccountServiceConfig accountServiceConfig;
-    private final LoansFeingClient loansFeingClients;
+    private final LoansFeignClient loansFeignClient;
     private final CardsFeignClient cardsFeignClient;
 
     @PostMapping("/myAccount")
@@ -56,10 +56,10 @@ public class AccountsController {
     @PostMapping("/myCustomerDetails")
     @CircuitBreaker(name = "detailsForCustomerSupportApp",fallbackMethod="myCustomerDetailsFallBack")
     @Retry(name = "retryForCustomerDetails", fallbackMethod = "myCustomerDetailsFallBack")
-    public CustomerDetails myCustomerDetails(@RequestHeader("eazybank-correlation-id") String correlationid, @RequestBody Customer customer) {
+    public CustomerDetails myCustomerDetails(@RequestHeader("eazybank-correlation-id") String correlationid,@RequestBody Customer customer) {
         logger.info("myCustomerDetails() method started");
         Accounts accounts = accountsRepository.findByCustomerId(customer.getCustomerId());
-        List<Loans> loans = loansFeingClients.getLoansDetails(correlationid,customer);
+        List<Loans> loans = loansFeignClient.getLoansDetails(correlationid,customer);
         List<Cards> cards = cardsFeignClient.getCardDetails(correlationid,customer);
 
         CustomerDetails customerDetails = new CustomerDetails();
@@ -70,20 +70,20 @@ public class AccountsController {
         return customerDetails;
     }
 
-    private CustomerDetails myCustomerDetailsFallBack(@RequestHeader("eazybank-correlation-id") String correlationid, Customer customer , Throwable t){
+    private CustomerDetails myCustomerDetailsFallBack(@RequestHeader("eazybank-correlation-id") String correlationid,Customer customer, Throwable t) {
         Accounts accounts = accountsRepository.findByCustomerId(customer.getCustomerId());
-        List<Loans> loans = loansFeingClients.getLoansDetails(correlationid,customer);
+        List<Loans> loans = loansFeignClient.getLoansDetails(correlationid,customer);
         CustomerDetails customerDetails = new CustomerDetails();
         customerDetails.setAccounts(accounts);
         customerDetails.setLoans(loans);
         return customerDetails;
+
     }
 
     @GetMapping("/sayHello")
     @RateLimiter(name = "sayHello", fallbackMethod = "sayHelloFallback")
-    public String sayHello(){
-        System.out.println("hi");
-        return "Hello , welcome  Kubernetes cluster eazybank";
+    public String sayHello() {
+        return "Hello, Welcome to EazyBank Kubernetes cluster";
     }
 
     private String sayHelloFallback(Throwable t) {

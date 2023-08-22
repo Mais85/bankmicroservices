@@ -8,4 +8,4 @@ data:
   SPRING_PROFILES_ACTIVE: {{ .Values.global.activeProfile }}
   SPRING_CONFIG_IMPORT: {{ .Values.global.configServerURL }}
   EUREKA_CLIENT_SERVICEURL_DEFAULTZONE: {{ .Values.global.eurekaServerURL }}
-  {{- end -}}
+{{- end -}}

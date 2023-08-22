@@ -23,8 +23,7 @@ public class LoanController {
     private final LoansServiceConfig loansServiceConfig;
 
     @PostMapping("/myLoans")
-    public List<Loans> getLoansDetails(@RequestHeader("eazybank-correlation-id") String correlationid, @RequestBody Customer customer) {
-        System.out.println("Invoking loans microservice");
+    public List<Loans> getLoansDetails(@RequestHeader("eazybank-correlation-id") String correlationid,@RequestBody Customer customer) {
         logger.info("getLoansDetails() method started");
         List<Loans> loans = loansRepository.findByCustomerIdOrderByStartDtDesc(customer.getCustomerId());
         logger.info("getLoansDetails() method ended");
