@@ -1,0 +1,25 @@
+# This is a YAML-formatted file.
+# Declare variables to be passed into your templates.
+
+deploymentName: loans-deployment
+deploymentLabel: loans
+appName: loans
+
+replicaCount: 1
+
+image:
+  repository: mais85/loans
+  tag: latest
+
+containerPort: 8091
+
+service:
+  type: ClusterIP
+  port: 8091
+  targetPort: 8091
+
+config_enabled: true
+zipkin_enabled: true
+profile_enabled: true
+eureka_enabled: true
+appname_enabled: true
